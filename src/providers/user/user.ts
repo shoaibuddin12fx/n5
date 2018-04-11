@@ -34,14 +34,19 @@ export class User {
    * the user entered on the form.
    */
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+
+
+    let url = "Login?username="+accountInfo["username"]+"&password="+accountInfo["password"];
+    console.log(url);
+    let seq = this.api.post(url, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
-      }
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
     }, err => {
       console.error('ERROR', err);
     });
@@ -54,13 +59,11 @@ export class User {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
+    let seq = this.api.post('SignUp', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
+      console.log(res);
     }, err => {
       console.error('ERROR', err);
     });
@@ -81,4 +84,115 @@ export class User {
   _loggedIn(resp) {
     this._user = resp.user;
   }
+
+  getClasses(Info: any) {
+
+
+    let url = "getClasses?batchTypeId="+Info["batchTypeId"];
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  getSubjects(Info: any) {
+
+
+    let url = "getSubjects?classId="+Info["classId"];
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  getTeachers(Info: any) {
+
+
+    let url = "getTeachers?classId="+Info["classId"]+"&subjectId="+Info["subjectId"];
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  getCategories(Info: any) {
+
+
+    let url = "getCategories";
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  getTests(Info: any) {
+
+
+    let url = "GetTestList?classId="+Info["classId"]+"&subjectId="+Info["subjectId"]+"&teacherId="+Info["teacherId"]+"&categoryId="+Info["categoryId"];
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
 }

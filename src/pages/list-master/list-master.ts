@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavParams, ToastController,  NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
+import { Items, User } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -11,15 +11,28 @@ import { Items } from '../../providers/providers';
 })
 export class ListMasterPage {
   currentItems: Item[];
+  viewType: string;
+  viewHeader: string;
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, 
+    navParams: NavParams, 
+    public items: Items, 
+    public modalCtrl: ModalController, 
+    public user: User,
+    public toastCtrl: ToastController) {
+
+    this.currentItems = navParams.get('items') || this.items.query();
+    
+    
   }
 
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+  }
+
+  ionViewWillAppear(){
   }
 
   /**
@@ -47,8 +60,213 @@ export class ListMasterPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
+
+    console.log(item);
+    switch (item["viewType"]) {
+      case "":
+        this.callGetClasses(item);
+        break;
+      case "classes":
+        this.callGetSubjects(item);
+        break;
+      case "subjects":
+        this.callGetTeachers(item);
+        break;
+      case "teachers":
+        this.callGetCategories(item);
+        break;  
+      case "categories":
+        this.callGetTests(item);
+        break;  
+      case "tests":
+        this.callGetTests(item);
+        break;  
+
+
+        
+        
+      default:
+        break;
+    }
+
+    
+
+
+
+    
+  }
+
+  callGetClasses(item: Item){
+    console.log(item);
+    this.user.getClasses(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError(resp["Message"]);
+      }else{
+        console.log(resp["Data"]);
+        var viewType = "classes";
+        for(let data of resp["Data"]) {
+          data.viewType = viewType;
+          data.classId = data["ID"];
+        }
+
+        this.navCtrl.push('ListMasterPage', {
+          items: resp["Data"]
+        });
+        
+      }
+
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
     });
+
+    
+
+  }
+
+  callGetSubjects(item: Item){
+    console.log(item);
+    this.user.getSubjects(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError(resp["Message"]);
+      }else{
+        console.log(resp["Data"]);
+        var viewType = "subjects";
+        for(let data of resp["Data"]) {
+          data.viewType = viewType;
+          data.classId = item["ID"];
+          data.subjectId = data["ID"];
+        }
+
+        this.navCtrl.push('ListMasterPage', {
+          items: resp["Data"]
+        });
+        
+      }
+      
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
+    });
+
+    
+
+  }
+
+  callGetTeachers(item: Item){
+    console.log(item);
+    this.user.getTeachers(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError(resp["Message"]);
+      }else{
+        console.log(resp["Data"]);
+        var viewType = "teachers";
+        for(let data of resp["Data"]) {
+          data.viewType = viewType;
+          data.classId = item["classId"];
+          data.subjectId = item["subjectId"];
+          data.teacherId = data["ID"];
+        }
+
+        this.navCtrl.push('ListMasterPage', {
+          items: resp["Data"]
+        });
+        
+      }
+      
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
+    });
+
+    
+
+  }
+
+  callGetCategories(item: Item){
+    console.log(item);
+    this.user.getCategories(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError(resp["Message"]);
+      }else{
+        console.log(resp["Data"]);
+        var viewType = "categories";
+        for(let data of resp["Data"]) {
+          data.viewType = viewType;
+          data.classId = item["classId"];
+          data.subjectId = item["subjectId"];
+          data.teacherId = item["teacherId"];
+          data.categoryId = data["ID"];
+        }
+
+        this.navCtrl.push('ListMasterPage', {
+          items: resp["Data"]
+        });
+        
+      }
+      
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
+    });
+
+    
+
+  }
+
+  callGetTests(item: Item){
+    console.log(item);
+    this.user.getTests(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError("No Test Found ... Call your teacher for assistance");
+      }else{
+        console.log(resp["Data"]);
+        var viewType = "tests";
+        for(let data of resp["Data"]) {
+          data.viewType = viewType;
+          data.classId = item["classId"];
+          data.subjectId = item["subjectId"];
+          data.teacherId = item["teacherId"];
+          data.categoryId = item["categoryId"];
+          data.testId = data["ID"];
+        }
+
+        this.navCtrl.push('ListMasterPage', {
+          items: resp["Data"]
+        });
+        
+      }
+      
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
+    });
+
+    
+
+  }
+
+  showError(err: string){
+    let toast = this.toastCtrl.create({
+      message: err,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

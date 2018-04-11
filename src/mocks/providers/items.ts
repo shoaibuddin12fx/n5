@@ -16,39 +16,20 @@ export class Items {
   constructor() {
     let items = [
       {
-        "name": "Burt Bear",
-        "profilePic": "assets/img/speakers/bear.jpg",
-        "about": "Burt is a Bear."
+        "Name": "Entry Test",
+        "ID": "2",
+        "batchTypeId": "2",
+        "viewType": "",
+        "profilePic": "https://lh3.googleusercontent.com/8ssOg3Bmtd6HBCSvnNaOtFGmLhiasunYjfxu8WlQRLgjmjIYagZBKrN7fyadYloavA",
+        "about": "Here you can prepare MDCAT ECAT or any Entry Test. 100% free full practice test."
       },
       {
-        "name": "Charlie Cheetah",
-        "profilePic": "assets/img/speakers/cheetah.jpg",
-        "about": "Charlie is a Cheetah."
-      },
-      {
-        "name": "Donald Duck",
-        "profilePic": "assets/img/speakers/duck.jpg",
-        "about": "Donald is a Duck."
-      },
-      {
-        "name": "Eva Eagle",
-        "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
-      },
-      {
-        "name": "Ellie Elephant",
-        "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
-      },
-      {
-        "name": "Molly Mouse",
-        "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
-      },
-      {
-        "name": "Paul Puppy",
-        "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
+        "Name": "Coaching Classes",
+        "ID": "1",
+        "batchTypeId": "1",
+        "viewType": "",
+        "profilePic": "http://www.hr-diagnostics.de/fileadmin/user_upload/Testbatterien/ENTRY-tuer-icon.png",
+        "about": "Here you can choose cources and tests from one of the best teachers of TABS"
       }
     ];
 

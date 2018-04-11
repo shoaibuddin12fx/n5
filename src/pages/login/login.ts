@@ -14,37 +14,53 @@ export class LoginPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+  account: { username: string, password: string } = {
+    username: 'shoaibuddin',
+    password: 'hotmail1VU'
   };
-
-  // Our translated text strings
-  private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    
   }
 
   // Attempt to login in through our User service
   doLogin() {
     this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+
+      console.log("boo", resp);
+      let d = new Array(resp["Data"]);
+
+      if(resp["Data"].length == 0){
+        this.showError(resp["Message"]);
+      }else{
+        console.log(resp["Data"]);
+        this.user._loggedIn(resp["Data"][0]);
+        this.navCtrl.push(MainPage);
+      }
+
+      
+
+
+
+
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
       // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.showError(err);
+      
     });
+  }
+
+  showError(err: string){
+    let toast = this.toastCtrl.create({
+      message: err,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

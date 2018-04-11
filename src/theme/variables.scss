@@ -33,6 +33,8 @@ $colors: (
 );
 
 
+
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -77,3 +79,5 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+$item-md-detail-push-show: true;
