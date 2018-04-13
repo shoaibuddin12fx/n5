@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { Component, ViewChild  } from '@angular/core';
+import { IonicPage, NavController, NavParams,ToastController, Slides } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, User } from '../../providers/providers';
 
@@ -10,29 +10,59 @@ import { Items, User } from '../../providers/providers';
 })
 export class ItemDetailPage {
   item: any;
-  currentItems: Item[];
+  questions: Item[];
+  slidIndex: number = 0;
+  slidesOptions = { initialSlide: 0 }
+  swiper: any;
+  @ViewChild('slider') slider: Slides;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, items: Items, public user: User, public toastCtrl: ToastController) {
-    this.item = navParams.get('item') || items.defaultItem;
-    this.fetchClasses()
+
+  public ionicNamedColor: string = 'light';
+
+  ngAfterViewInit() {
+    // child is set
+    this.slider.lockSwipes(true);
   }
 
-  fetchClasses() {
+  constructor(public navCtrl: NavController, navParams: NavParams, items: Items, public user: User, public toastCtrl: ToastController) {
+    var data = navParams.get('item')
+    this.item = data[0];    
+    this.SetQuestion()
+    
+  }
+
+  onIonDrag(event){
+    this.swiper = event;
+    this.swiper.lockSwipes();
+  }
+
+  slideNext(){
+    this.slider.lockSwipes(false);
+    this.slider.slideNext();
+    this.slider.lockSwipes(true);
+  }
+
+  SetQuestion() {
     // Attempt to login in through our User service
-    this.user.getClasses(this.item).subscribe((resp) => {
+    
+    this.questions = this.item["Question"];
+  }
 
-      console.log(resp);
-      if(resp["Data"].length == 0){
-        this.showError(resp["Message"]);
-      }else{
-        console.log(resp["Data"]);
-        this.currentItems = resp["Data"];
-        
-      }
+  goToSlide() {
+    this.slider.slideTo(2, 500);
+  }
 
-    }, (err) => {
-      this.showError(err);
-    });
+  rightorwrong(item, data){
+
+    if(data.IsAnswer){
+      data.ionicNamedColor = 'right'
+    }else{
+      data.ionicNamedColor = 'wrong'
+    }
+    this.slideNext();
+
+
+    
   }
 
   showError(err: string){

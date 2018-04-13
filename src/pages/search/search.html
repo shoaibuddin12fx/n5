@@ -1,14 +1,28 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Reports</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <!-- <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar> -->
+  <ion-card color="secondary">
+
+    <!-- <ion-card-header>
+      Card Header
+    </ion-card-header> -->
+  
+    <ion-card-content>
+      <!-- Add card content here! -->
+      <p>
+        Reports Feature Comming Soon
+      </p>
+    </ion-card-content>
+  
+  </ion-card>
   <ion-list>
     <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
       <ion-avatar item-start>

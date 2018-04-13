@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{viewHeader}}</ion-title>
 
     <!-- <ion-buttons end>
@@ -12,24 +12,32 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content color="primary" padding>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img src='http://www.hr-diagnostics.de/fileadmin/user_upload/Testbatterien/ENTRY-tuer-icon.png' />
-        </ion-avatar>
-        <h2>{{item.Name}}</h2>
-        <p>{{item.ID}}</p>
-        <!-- <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note> -->
-      </button>
+  <ion-card>
+    <!-- <ion-card-header>
+      
+    </ion-card-header> -->
+    <div class="white-line">
+      {{viewType}}
+    </div> 
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of currentItems" detail-push>
+          <button ion-item (click)="openItem(item)" class="item-icon-right">
+            <!-- <ion-avatar item-start>              
+              <ion-icon name="ios-book-outline"></ion-icon>
+            </ion-avatar> -->
+            <p></p>
+            <h2><ion-icon name="arrow-forward"></ion-icon> &nbsp;&nbsp; {{item.Name}}</h2>
+            <p></p>
+            <!-- <p>{{item.ID}}</p> -->
+            
+          </button>
+          
+          
+        </ion-item-sliding>
+      </ion-list>
+  </ion-card>
 
-      <!-- <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </button>
-      </ion-item-options> -->
-    </ion-item-sliding>
-  </ion-list>
+  
 </ion-content>

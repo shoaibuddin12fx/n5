@@ -1,3 +1,42 @@
 page-list-master {
 
+    ion-content{
+        background: url("../assets/img/sketch.jpg") no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        
+    }
+
+    ion-card{
+        border-radius: 5% !important;
+    }
+
+    ion-card, ion-item-sliding, ion-item-sliding > button  {
+        background: transparent !important;
+    }
+
+    .white-line{
+        color: #f27125;
+        font-size: 2em;
+        font-weight: 400;
+        // background: #f27125;
+        padding: 2%;
+    }
+
+    ion-item-sliding *{
+        color: #000000 !important;
+    }
+    
+    
+    ion-card-header {
+        height: 25vh;
+        // background: url("../assets/img/book.png") no-repeat center center ; 
+        // -webkit-background-size: cover;
+        // -moz-background-size: cover;
+        // -o-background-size: cover;
+        // background-size: cover;
+    }
+
 }

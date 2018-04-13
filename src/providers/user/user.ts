@@ -195,4 +195,27 @@ export class User {
     return seq;
   }
 
+  getATest(Info: any) {
+
+
+    let url = "GetTest/9?and="+Info["testId"];
+
+    console.log(url);
+    let seq = this.api.get(url).share()
+    // let seq = this.api.post(url, Info).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      // if (res.status == 'success') {
+      //   this._loggedIn(res);
+      // } else {
+      // }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
 }

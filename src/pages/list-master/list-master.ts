@@ -4,6 +4,7 @@ import { IonicPage, ModalController, NavParams, ToastController,  NavController 
 import { Item } from '../../models/item';
 import { Items, User } from '../../providers/providers';
 
+
 @IonicPage()
 @Component({
   selector: 'page-list-master',
@@ -23,6 +24,38 @@ export class ListMasterPage {
 
     this.currentItems = navParams.get('items') || this.items.query();
     
+    switch (this.currentItems[0]["viewType"]) {
+      case "":
+        this.viewHeader = "Welcome ! Pick One"    
+        this.viewType = "TABS Entities"
+        break;
+      case "classes":
+      this.viewHeader = "Pick One"    
+      this.viewType = "Teaching Classes"
+        break;
+      case "subjects":
+      this.viewHeader = "Pick One"    
+      this.viewType = "Relative Subjects"
+        break;
+      case "teachers":
+      this.viewHeader = "Pick One"    
+      this.viewType = "Available Teachers"
+        break;  
+      case "categories":
+      this.viewHeader = "Pick One"    
+      this.viewType = "Test Categories"
+        break;  
+      case "tests":
+      this.viewHeader = "Pick One"    
+      this.viewType = "Choose From List"
+        break;  
+
+
+        
+        
+      default:
+        break;
+    }
     
   }
 
@@ -79,7 +112,7 @@ export class ListMasterPage {
         this.callGetTests(item);
         break;  
       case "tests":
-        this.callGetTests(item);
+        this.callATest(item);
         break;  
 
 
@@ -246,6 +279,32 @@ export class ListMasterPage {
 
         this.navCtrl.push('ListMasterPage', {
           items: resp["Data"]
+        });
+        
+      }
+      
+    }, (err) => {
+      //this.navCtrl.push(MainPage);
+      // Unable to log in
+      this.showError(err);
+      
+    });
+
+    
+
+  }
+
+  callATest(item: Item){
+    console.log(item);
+    this.user.getATest(item).subscribe((resp) => {
+
+      if(resp["Data"].length == 0){
+        this.showError("No Test Found ... Call your teacher for assistance");
+      }else{
+        console.log(resp["Data"]);
+
+        this.navCtrl.push('ItemDetailPage', {
+          item: resp["Data"]
         });
         
       }

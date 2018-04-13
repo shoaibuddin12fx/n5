@@ -1,18 +1,54 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ item.name }}</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>{{ item.Name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div>
+<ion-content  padding>
+    
+  <ion-card>
+        <!-- <ion-card-header>
+          
+        </ion-card-header> -->
+        <div class="white-line">
+          {{item.Subject}}
+        </div> 
+        <div class="line-p">{{item.Category}} test of {{item.Teacher}} for "{{item.Class}}"</div>
+      <ion-slides #slider pager (ionDrag)="onIonDrag(event)">
+        <ion-slide *ngFor="let itm of questions" padding>
 
-  <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
-  </div>
+                
+            {{itm.Name}}
+            <br><br>
+
+            <ion-list>
+                <ion-item-sliding *ngFor="let im of itm['Options']" detail-push>
+                  <ion-item  class="item-icon-right gaps" (click)="rightorwrong(this, im)" [color]="im.ionicNamedColor">
+                    <!-- <ion-avatar item-start>              
+                      <ion-icon name="ios-book-outline"></ion-icon>
+                    </ion-avatar> -->
+                    <p></p>
+                    <h2><ion-icon name="radio-button-off"></ion-icon> &nbsp;&nbsp; {{im.Option}}</h2>
+                    <p></p>
+                    <!-- <p>{{item.ID}}</p> -->
+                    
+                  </ion-item>
+                  
+                  
+                </ion-item-sliding>
+              </ion-list>
+
+        </ion-slide>
+        
+      </ion-slides>
+  </ion-card>
+
+  <ion-fab bottom right>
+      <button ion-fab (click)="slideNext()"><ion-icon name="arrow-forward"></ion-icon></button>
+  </ion-fab>
+
+
 </ion-content>

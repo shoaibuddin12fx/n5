@@ -1,4 +1,45 @@
 page-item-detail {
+
+  ion-content{
+    background: url("../assets/img/sketch.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+  }
+
+  ion-card{
+    border-radius: 5% !important;
+  }
+
+  ion-card, ion-card {
+    background: transparent !important;
+  }
+
+  ion-item .gaps{
+
+  }
+
+  .swiper-pagination-bullet-active{
+    background: #f27125;
+  }
+
+  .white-line{
+    color: #f27125;
+    font-size: 2em;
+    font-weight: 400;
+    // background: #f27125;
+    padding: 2%;
+    text-align: center;
+  }
+  .line-p {
+    color: #FFFFFF;
+    background: #f27125 !important;
+    text-align: center;
+    padding: 3%;
+  }
+  
   .item-profile {
     width: 100%;
     background-position: center center;

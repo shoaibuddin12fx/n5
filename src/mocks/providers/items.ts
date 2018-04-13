@@ -16,21 +16,22 @@ export class Items {
   constructor() {
     let items = [
       {
-        "Name": "Entry Test",
-        "ID": "2",
-        "batchTypeId": "2",
-        "viewType": "",
-        "profilePic": "https://lh3.googleusercontent.com/8ssOg3Bmtd6HBCSvnNaOtFGmLhiasunYjfxu8WlQRLgjmjIYagZBKrN7fyadYloavA",
-        "about": "Here you can prepare MDCAT ECAT or any Entry Test. 100% free full practice test."
-      },
-      {
         "Name": "Coaching Classes",
         "ID": "1",
         "batchTypeId": "1",
         "viewType": "",
         "profilePic": "http://www.hr-diagnostics.de/fileadmin/user_upload/Testbatterien/ENTRY-tuer-icon.png",
         "about": "Here you can choose cources and tests from one of the best teachers of TABS"
+      },
+      {
+        "Name": "Entry Test",
+        "ID": "2",
+        "batchTypeId": "2",
+        "viewType": "",
+        "profilePic": "https://lh3.googleusercontent.com/8ssOg3Bmtd6HBCSvnNaOtFGmLhiasunYjfxu8WlQRLgjmjIYagZBKrN7fyadYloavA",
+        "about": "Here you can prepare MDCAT ECAT or any Entry Test. 100% free full practice test."
       }
+     
     ];
 
     for (let item of items) {
