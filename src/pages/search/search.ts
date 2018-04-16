@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
+import { Items, Settings } from '../../providers/providers';
+import { CurrencyPipe } from '@angular/common/src/pipes';
 
 @IonicPage()
 @Component({
@@ -11,9 +12,24 @@ import { Items } from '../../providers/providers';
 })
 export class SearchPage {
 
-  currentItems: any = [];
+  currentItems: any = new Array();
+  isHidden: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items,  public settings: Settings) {
+    // this.settings.loadreports().then(()=>{
+    //   console.log(this.settings.reports);
+    // })
+  }
+
+  ionViewWillEnter(){
+    this.settings.loadreports().then(()=>{
+      console.log(this.settings.reports);
+      this.currentItems = this.settings.reports;
+      
+
+    })
+    
+  }
 
   /**
    * Perform a service for the proper items.

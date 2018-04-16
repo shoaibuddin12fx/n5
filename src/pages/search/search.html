@@ -7,9 +7,9 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <!-- <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar> -->
-  <ion-card color="secondary">
+  <ion-card color="secondary" *ngIf="currentItems.length == 0">
 
     <!-- <ion-card-header>
       Card Header
@@ -18,12 +18,27 @@
     <ion-card-content>
       <!-- Add card content here! -->
       <p>
-        Reports Feature Comming Soon
+        No reports found
       </p>
     </ion-card-content>
   
   </ion-card>
-  <ion-list>
+
+  <ion-card *ngFor="let item of currentItems">
+      <!-- <ion-card-header>
+        
+      </ion-card-header> -->
+      <div class="white-line">
+        {{item.Subject}}
+      </div> 
+      <div class="line-p">{{item.Category}} test of {{item.Teacher}} for "{{item.Class}}"</div>
+      <ion-card-content>
+          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        </ion-card-content>
+    
+</ion-card>
+
+  <!-- <ion-list>
     <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
       <ion-avatar item-start>
         <img [src]="item.profilePic" />
@@ -32,5 +47,5 @@
       <p>{{item.about}}</p>
       <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
     </button>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

@@ -11,14 +11,7 @@ page-item-detail {
 
   ion-card{
     border-radius: 5% !important;
-  }
-
-  ion-card, ion-card {
     background: transparent !important;
-  }
-
-  ion-item .gaps{
-
   }
 
   .swiper-pagination-bullet-active{
@@ -40,16 +33,4 @@ page-item-detail {
     padding: 3%;
   }
   
-  .item-profile {
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
-    height: 250px;
-  }
-
-  .item-detail {
-    width: 100%;
-    background: white;
-    position: absolute;
-  }
 }

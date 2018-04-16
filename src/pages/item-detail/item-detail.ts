@@ -1,7 +1,7 @@
 import { Component, ViewChild  } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController, Slides, Tabs, AlertController  } from 'ionic-angular';
 import { Item } from '../../models/item';
-import { Items, User } from '../../providers/providers';
+import { Items, User, Settings } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -10,6 +10,8 @@ import { Items, User } from '../../providers/providers';
 })
 export class ItemDetailPage {
   item: any;
+  isTestFinish: boolean = false;
+  noOfCorrectAnswers: number = 0;
   questions: Item[];
   slidIndex: number = 0;
   slidesOptions = { initialSlide: 0 }
@@ -24,10 +26,11 @@ export class ItemDetailPage {
     this.slider.lockSwipes(true);
   }
 
-  constructor(public navCtrl: NavController, navParams: NavParams, items: Items, public user: User, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, navParams: NavParams, items: Items, public user: User, public toastCtrl: ToastController, private alertCtrl: AlertController, public settings: Settings) {
     var data = navParams.get('item')
     this.item = data[0];    
     this.SetQuestion()
+    console.log(this.settings.loadreports());
     
   }
 
@@ -37,9 +40,42 @@ export class ItemDetailPage {
   }
 
   slideNext(){
-    this.slider.lockSwipes(false);
-    this.slider.slideNext();
-    this.slider.lockSwipes(true);
+
+    
+      setTimeout(() => 
+      {
+        if(this.slider.isEnd()){ 
+
+          //this.presentConfirm();
+          this.item["gain"] = this.noOfCorrectAnswers;
+          this.item["total"] = this.questions.length;
+          this.settings.savereport(this.item);
+          this.navCtrl.pop();
+
+        }else{
+          this.slider.lockSwipes(false);
+          this.slider.slideNext();
+          this.slider.lockSwipes(true);
+        }
+      },
+      500);
+    
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Finished - ' + this.noOfCorrectAnswers + "/" + this.questions.length ,
+      message: 'Nice score! You can see all test reports in test section',
+      buttons: [
+        {
+          text: 'Done',
+          handler: () => {
+              this.navCtrl.popAll();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   SetQuestion() {
@@ -55,6 +91,7 @@ export class ItemDetailPage {
   rightorwrong(item, data){
 
     if(data.IsAnswer){
+      this.noOfCorrectAnswers = this.noOfCorrectAnswers + 1;
       data.ionicNamedColor = 'right'
     }else{
       data.ionicNamedColor = 'wrong'
