@@ -29,11 +29,18 @@
         
       </ion-card-header> -->
       <div class="white-line">
-        {{item.Subject}}
+        {{item.Name}}
       </div> 
-      <div class="line-p">{{item.Category}} test of {{item.Teacher}} for "{{item.Class}}"</div>
-      <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <div class="line-p"></div>
+      <ion-card-content class="content-p">
+          <h1>{{item.Subject}}</h1>
+          <p>{{item.Category}} test of {{item.Teacher}} for "{{item.Class}}"</p>
+          <p></p>
+          <ion-item class="line-item">
+              <ion-icon name="ios-bookmark" item-start color="primary"></ion-icon>
+              SCORE !!
+              <ion-badge item-end>{{item.gain}} / {{item.total}}</ion-badge>
+            </ion-item>
         </ion-card-content>
     
 </ion-card>

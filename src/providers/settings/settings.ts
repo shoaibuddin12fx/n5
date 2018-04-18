@@ -8,9 +8,11 @@ import { Storage } from '@ionic/storage';
 export class Settings {
   private SETTINGS_KEY: string = '_settings';
   private REPORTS_KEY: string = '_reports';
+  private USER_KEY: string = '_user';
 
   settings: any;
   reports: any = [];
+  users: any;
 
   _defaults: any;
   _readyPromise: Promise<any>;
@@ -18,6 +20,24 @@ export class Settings {
   constructor(public storage: Storage, defaults: any) {
     this._defaults = defaults;
     this.reports = new Array();
+  }
+
+  loaduser() {
+    return this.storage.get(this.USER_KEY)
+      .then(profile => {
+        console.log(profile);
+        return profile;
+      });
+  }
+
+  saveuser(user: any){
+    console.log(user); 
+    this.storage.set(this.USER_KEY, user);
+  }
+
+  deleteuser(){
+    
+    this.storage.remove(this.USER_KEY);
   }
 
   loadreports() {

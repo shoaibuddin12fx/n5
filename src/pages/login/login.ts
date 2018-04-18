@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, Settings } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -22,7 +22,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public settings: Settings) {
 
     
   }
@@ -39,7 +40,12 @@ export class LoginPage {
       }else{
         console.log(resp["Data"]);
         this.user._loggedIn(resp["Data"][0]);
-        this.navCtrl.push(MainPage);
+        this.settings.saveuser(resp["Data"][0]); 
+        //this.navCtrl.push(MainPage);
+        this.navCtrl.setRoot(MainPage);
+        this.navCtrl.popToRoot();
+
+
       }
 
       

@@ -8,4 +8,32 @@ page-settings {
         background-size: cover;
         
     }
+
+    ion-card{
+        border-radius: 5% !important;
+        background: transparent !important;
+      }
+    
+      .swiper-pagination-bullet-active{
+        background: #f27125;
+      }
+    
+      .white-line{
+        color: #f27125;
+        font-size: 2em;
+        font-weight: 400;
+        // background: #f27125;
+        padding: 2%;
+        text-align: center;
+      }
+      .line-p { 
+        color: #FFFFFF;
+        background: #f27125 !important;
+        text-align: center;
+        height: 2px;
+      }
+
+      .content-p {
+        text-align: center;
+      }
 }

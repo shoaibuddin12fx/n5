@@ -46,11 +46,12 @@ export class ItemDetailPage {
       {
         if(this.slider.isEnd()){ 
 
-          //this.presentConfirm();
+          
           this.item["gain"] = this.noOfCorrectAnswers;
           this.item["total"] = this.questions.length;
           this.settings.savereport(this.item);
-          this.navCtrl.pop();
+          this.presentConfirm();
+          //this.navCtrl.pop();
 
         }else{
           this.slider.lockSwipes(false);
